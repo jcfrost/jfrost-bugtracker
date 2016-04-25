@@ -18,9 +18,11 @@ namespace jfrost_bugtracker.Models
         public ApplicationUser()
         {
             this.TicketComment = new HashSet<TicketComments>();
+            this.Projects = new HashSet<Projects>();
         }
 
         public virtual ICollection<TicketComments> TicketComment { get; set; }
+        public virtual ICollection<Projects> Projects { get; set; }
 
 
 
@@ -47,5 +49,7 @@ namespace jfrost_bugtracker.Models
 
         public DbSet<Tickets> Tickets { get; set; }
         public DbSet<TicketComments> TicketComment { get; set; }
+
+        public System.Data.Entity.DbSet<jfrost_bugtracker.Models.Projects> Projects { get; set; }
     }
 }

@@ -13,6 +13,11 @@ namespace jfrost_bugtracker.Controllers
             return View();
         }
 
+        public ActionResult Admin()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "My Bug Tracker Project";

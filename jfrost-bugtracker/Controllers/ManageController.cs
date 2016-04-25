@@ -98,6 +98,30 @@ namespace jfrost_bugtracker.Controllers
             }
             return RedirectToAction("ManageLogins", new { Message = message });
         }
+        //
+        // GET: /Manage/ChangeDisplayname
+        public ActionResult ChangeDisplayName()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Manage/ChangeDisplayName  
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeDisplayName(ChangeDisplayNameViewModel model)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            if (ModelState.IsValid)
+            {
+                var userid = User.Identity.GetUserId();
+                var user = db.Users.Find(userid);
+                user.DisplayName = model.DisplayName;
+                db.SaveChanges();
+               
+            }
+            return View(model);
+        }
 
         //
         // GET: /Manage/AddPhoneNumber
