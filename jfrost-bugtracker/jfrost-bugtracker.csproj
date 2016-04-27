@@ -200,6 +200,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,12 +210,16 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Projects.cs" />
+    <Compile Include="Models\ProjUsersViewModel.cs" />
     <Compile Include="Models\TicketAttachments.cs" />
     <Compile Include="Models\TicketComments.cs" />
     <Compile Include="Models\TicketHistories.cs" />
     <Compile Include="Models\TicketNotifications.cs" />
+    <Compile Include="Models\TicketPriorities.cs" />
     <Compile Include="Models\Tickets.cs" />
-    <Compile Include="Models\UserProjectHelper.cs" />
+    <Compile Include="Models\TicketStatuses.cs" />
+    <Compile Include="Models\TicketTypes.cs" />
+    <Compile Include="Models\ProjectHelper.cs" />
     <Compile Include="Models\UserRolesHelper.cs" />
     <Compile Include="Models\UserRolesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -281,7 +286,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Projects\AssignUsersToProj.cshtml" />
     <Content Include="Views\AdminUserViewModel.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
     <Content Include="Views\Manage\ChangeDisplayName.cshtml" />
@@ -290,6 +295,12 @@
     <Content Include="Views\Projects\Details.cshtml" />
     <Content Include="Views\Projects\Edit.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\Tickets\Create.cshtml" />
+    <Content Include="Views\Tickets\Delete.cshtml" />
+    <Content Include="Views\Tickets\Details.cshtml" />
+    <Content Include="Views\Tickets\Edit.cshtml" />
+    <Content Include="Views\Tickets\Index.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

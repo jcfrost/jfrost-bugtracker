@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace jfrost_bugtracker.Models
 {
@@ -49,7 +50,16 @@ namespace jfrost_bugtracker.Models
 
         public DbSet<Tickets> Tickets { get; set; }
         public DbSet<TicketComments> TicketComment { get; set; }
+        public DbSet<TicketAttachments> TicketAttachment { get; set; }
+        public DbSet<TicketHistories> TicketHistory { get; set; }
+        public DbSet<TicketNotifications> TicketNotification { get; set; }
+        public DbSet<TicketPriorities> TicketPriority { get; set; }
+        public DbSet<TicketStatuses> TicketStatus { get; set; }
+        public DbSet<TicketTypes> TicketType { get; set; }
 
         public System.Data.Entity.DbSet<jfrost_bugtracker.Models.Projects> Projects { get; set; }
+        public IEnumerable TicketPriorities { get; internal set; }
+        public IEnumerable TicketStatuses { get; internal set; }
+        public IEnumerable TicketTypes { get; internal set; }
     }
 }

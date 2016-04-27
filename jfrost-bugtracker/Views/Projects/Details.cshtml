@@ -26,6 +26,18 @@
             @Html.DisplayFor(model => model.ProjectStatus)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Users)
+        </dt>
+
+        <dd>
+            @foreach(var user in Model.Users)
+            {
+            @user.DisplayName<br />
+            }
+            
+        </dd>
+
     </dl>
 </div>
 <p>

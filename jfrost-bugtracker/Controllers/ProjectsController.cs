@@ -14,6 +14,59 @@ namespace jfrost_bugtracker.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        //need to display list of users
+        public ActionResult Users()
+        {
+            var user = db.Users.ToList();
+            return View(user); //return View(db.Users.ToList());
+        }
+
+        //GET: Projects/AssignUsersToProjects
+        [Authorize(Roles = "Administrator, ProjectManager")]
+        public ActionResult AssignUsersToProj (int id)
+        {
+            var project = db.Projects.Find(id);//change user to project
+            ProjectHelper helper = new ProjectHelper(db);
+            var model = new ProjUsersViewModel();
+
+            model.Project = project;
+
+            model.Selected = helper.UsersOnProj(id).Select(n => n.Id).ToArray();
+            model.Users = new MultiSelectList(db.Users, "Id", "DisplayName", model.Selected);
+
+            return View(model);
+        }
+
+        //POST: Projects/AssignUsersToProjects
+        [Authorize(Roles = "Administrator, ProjectManager")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AssignUsersToProj(ProjUsersViewModel model)
+        {
+            //if (ModelState.IsValid)
+
+
+            var project = db.Projects.Find(model.Project.Id);
+            ProjectHelper helper = new ProjectHelper(db);
+            foreach (var users in db.Users.Select(u => u.Id).ToList()) //"users" or "project"??
+            {
+                helper.RemoveUserFromProj(users, project.Id);
+            }
+            if (model.Selected != null)
+            {
+                foreach (var users in model.Selected) //"users" or "project"??
+                {
+                    helper.AddUserToProj(users, project.Id);
+                }
+            }
+            return RedirectToAction("Index", "Projects");
+
+
+            //return View();
+
+        }
+
+
         // GET: Projects
         //[Authorize]
         [Authorize(Roles = "Administrator, Developer, ProjectManager")]
