@@ -24,6 +24,8 @@
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
+                @*@Html.HiddenFor(model => model.Project.Id)*@
+
                 <input type="hidden" name="Id" value="@Model.Id" />
 
                 @Html.ListBox("selected", Model.Roles)

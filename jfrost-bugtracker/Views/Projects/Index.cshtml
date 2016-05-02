@@ -1,31 +1,33 @@
 ﻿@model IEnumerable<jfrost_bugtracker.Models.Projects>
 
-    @{
-        ViewBag.Title = "Index";
-    }
+@{
+    ViewBag.Title = "Index";
+}
 
-    <h2>Projects</h2>
+<h2>Projects</h2>
 
-    @if (User.IsInRole("Administrator"))
-    {
-        <p>
-            @Html.ActionLink("Create New Project", "Create")
-        </p>
+@if (User.IsInRole("Administrator"))
+{
+    <p>
+        @*@Html.ActionLink("Create New Project", "Create")*@ <!--**Replaced with button**-->
+        <a class="btn btn-default" href="@Url.Action("Create", "Projects")">Create New Project</a>
+    </p>
 
         @*<li>@Html.ActionLink("Create Project", "Create", "Projects")</li>
             <li>@Html.ActionLink("Admin", "Users", "Admin")</li>*@
-    }
+}
 
-    <table class="table">
+<table id="projectstable" class="table">
+    <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Project
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProjectStatus)
+                Status
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Users)
+                Users
             </th>
             @if (User.IsInRole("Administrator"))
             {
@@ -35,6 +37,8 @@
 
             }
         </tr>
+    </thead>
+    <tbody>
 
         @foreach (var item in Model)
         {
@@ -64,5 +68,10 @@
 
             </tr>
         }
-
-    </table>
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $('#projects_table').DataTable();
+    </script>
+}

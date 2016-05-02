@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using jfrost_bugtracker.Models;
+using Microsoft.AspNet.Identity;
 
 namespace jfrost_bugtracker.Controllers
 {
@@ -22,13 +23,13 @@ namespace jfrost_bugtracker.Controllers
         }
 
         //GET: Projects/AssignUsersToProjects
-        [Authorize(Roles = "Administrator, ProjectManager")]
+        [Authorize(Roles = "Administrator, Project Manager")]
         public ActionResult AssignUsersToProj (int id)
         {
             var project = db.Projects.Find(id);//change user to project
             ProjectHelper helper = new ProjectHelper(db);
             var model = new ProjUsersViewModel();
-
+            ViewBag.currentUsers = helper.UsersOnProj(id);
             model.Project = project;
 
             model.Selected = helper.UsersOnProj(id).Select(n => n.Id).ToArray();
@@ -38,7 +39,7 @@ namespace jfrost_bugtracker.Controllers
         }
 
         //POST: Projects/AssignUsersToProjects
-        [Authorize(Roles = "Administrator, ProjectManager")]
+        [Authorize(Roles = "Administrator, Project Manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AssignUsersToProj(ProjUsersViewModel model)
@@ -72,6 +73,12 @@ namespace jfrost_bugtracker.Controllers
         [Authorize(Roles = "Administrator, Developer, ProjectManager")]
         public ActionResult Index()
         {
+            //var user = db.Users.Find(User.Identity.GetUserId());
+
+            //var projects = user.Projects.Select(p => p.Name).ToList(); //gets all projects that user is assigned to
+
+            //return View(projects);
+
             return View(db.Projects.ToList());
         }
 
@@ -103,10 +110,11 @@ namespace jfrost_bugtracker.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,ProjectStatus")] Projects projects)
+        public ActionResult Create([Bind(Include = "Id, Name, ProjectStatus")] Projects projects)
         {
             if (ModelState.IsValid)
             {
+                projects.ProjectStatus = "OPEN";
                 db.Projects.Add(projects);
                 db.SaveChanges();
                 return RedirectToAction("Index");

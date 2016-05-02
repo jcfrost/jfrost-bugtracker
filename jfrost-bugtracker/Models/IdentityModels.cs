@@ -57,9 +57,6 @@ namespace jfrost_bugtracker.Models
         public DbSet<TicketStatuses> TicketStatus { get; set; }
         public DbSet<TicketTypes> TicketType { get; set; }
 
-        public System.Data.Entity.DbSet<jfrost_bugtracker.Models.Projects> Projects { get; set; }
-        public IEnumerable TicketPriorities { get; internal set; }
-        public IEnumerable TicketStatuses { get; internal set; }
-        public IEnumerable TicketTypes { get; internal set; }
+        public DbSet<Projects> Projects { get; set; }
     }
 }

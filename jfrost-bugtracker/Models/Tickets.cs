@@ -16,7 +16,7 @@ namespace jfrost_bugtracker.Models
 
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
+        public string Description { get; set; } //==>Blogpost "Body"
         public DateTimeOffset Created { get; set; }
         public DateTimeOffset? Updated { get; set; }
         public int ProjectId { get; set; }
@@ -37,5 +37,6 @@ namespace jfrost_bugtracker.Models
 
         public virtual ApplicationUser OwnerUser { get; set; }
         public virtual ApplicationUser AssignedToUser { get; set; }
+        public virtual ApplicationUser DisplayName { get; set; }
     }
 }

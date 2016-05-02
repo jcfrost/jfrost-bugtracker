@@ -20,7 +20,7 @@ namespace jfrost_bugtracker.Models
             return project.Users.Any(u => u.Id == userId); //return each userId that it finds associated with the projectId
         }
 
-        public ICollection<ApplicationUser> UsersOnProj(int projectId)
+        public IList<ApplicationUser> UsersOnProj(int projectId)
         {
             Projects project = db.Projects.Find(projectId);
             var userList = project.Users.ToList();
